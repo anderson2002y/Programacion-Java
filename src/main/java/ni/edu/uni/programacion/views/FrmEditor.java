@@ -7,6 +7,9 @@ package ni.edu.uni.programacion.views;
 
 import javax.swing.JOptionPane;
 import ni.edu.uni.programacion.views.panels.PnlEditor;
+import java.io.File;
+import java.io.IOException; 
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -64,7 +67,7 @@ public class FrmEditor extends javax.swing.JFrame {
 
         mnFile.setText("File");
 
-        mniNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         mniNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new-file.png"))); // NOI18N
         mniNew.setText("New");
         mniNew.addActionListener(new java.awt.event.ActionListener() {
@@ -74,16 +77,26 @@ public class FrmEditor extends javax.swing.JFrame {
         });
         mnFile.add(mniNew);
 
-        mniOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         mniOpen.setText("Open");
+        mniOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniOpenActionPerformed(evt);
+            }
+        });
         mnFile.add(mniOpen);
 
-        mniSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         mniSaveAs.setText("Save As");
+        mniSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSaveAsActionPerformed(evt);
+            }
+        });
         mnFile.add(mniSaveAs);
         mnFile.add(jSeparator1);
 
-        mniExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         mniExit.setText("Exit");
         mnFile.add(mniExit);
 
@@ -118,6 +131,28 @@ public class FrmEditor extends javax.swing.JFrame {
         int index = tbpContent.getSelectedIndex();
         tbpContent.remove(index);
     }//GEN-LAST:event_btnCloseTabActionPerformed
+
+    private void mniSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSaveAsActionPerformed
+        // TODO add your handling code here:
+        try {
+          File myObj = new File("C:\\Users\\LENOVO\\Desktop\\filename.txt");
+          if (myObj.createNewFile()) {
+            System.out.println("File created: " + myObj.getName());
+          } else {
+            System.out.println("File already exists.");
+          }
+        } catch (IOException e) {
+          System.out.println("An error occurred.");
+          e.printStackTrace();
+        }
+    }//GEN-LAST:event_mniSaveAsActionPerformed
+
+    private void mniOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniOpenActionPerformed
+        // TODO add your handling code here:
+           JFileChooser file=new JFileChooser();
+           file.showOpenDialog(this);
+           System.out.println(file.getSelectedFile());
+    }//GEN-LAST:event_mniOpenActionPerformed
 
     /**
      * @param args the command line arguments

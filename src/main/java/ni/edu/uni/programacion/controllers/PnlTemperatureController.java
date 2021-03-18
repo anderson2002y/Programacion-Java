@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ni.edu.uni.programacion.controllers;
-
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -57,11 +57,21 @@ public class PnlTemperatureController {
     private void conversionEvent() throws NumberFormatException {
         int indexFrom = pnlConversionTemplate.getCmbFrom().getSelectedIndex();
         int indexTo = pnlConversionTemplate.getCmbTo().getSelectedIndex();
-        double value = Double.parseDouble(
-                pnlConversionTemplate.getTxtValue().getText());
+        
+        if (pnlConversionTemplate.getTxtValue().getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese una temperatura");
+        }else{
 
-        double result = convertirTemperature(value, indexFrom, indexTo);
-        pnlConversionTemplate.getLblResult().setText("Resultado: " + result);
+            try {
+                double value = Double.parseDouble(
+                    pnlConversionTemplate.getTxtValue().getText());
+                double result = convertirTemperature(value, indexFrom, indexTo);
+                    pnlConversionTemplate.getLblResult().setText("Resultado: " + result);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar numeros");
+            }
+        }
+
     }
 
     private double convertirTemperature(double value, int from, int to) {
